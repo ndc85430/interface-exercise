@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ContactsApplication {
-    public ContactsApplication() {
+    public ContactsApplication(RowWriter rowWriter) {
         this.contacts = new ArrayList<>();
         Collections.addAll(
                 this.contacts,
@@ -13,14 +13,17 @@ public class ContactsApplication {
                 new Contact("Jane Doe", "jane.doe@example.com", "+33123456789"),
                 new Contact("Kate Smith", "katesmith@example.com", "+15551234567")
         );
+
+        this.rowWriter = rowWriter;
     }
 
     public void run() {
         for (Contact c: this.contacts) {
-            System.out.println(c.name);
+            System.out.println(this.rowWriter.writeRow(c));
         }
     }
 
 
     private final List<Contact> contacts;
+    private final RowWriter rowWriter;
 }
